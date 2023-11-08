@@ -7,14 +7,56 @@
     <title>Data Visualization Website</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://d3js.org/d3.v6.min.js"></script>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 </head>
 
 <body>
-    <header>
-        <h1>Data Visualization</h1>
-    </header>
-    <div class="visualization-container">
-        <svg id="chart"></svg>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto"> <!-- Align items to the right -->
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./pages/assignment 1/assignment1.html">assignment 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">assignment 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">assignment 3</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main">
+        <!-- <svg id="chart"></svg> -->
+
+        <div>
+            <div class="jumbotron">
+                <h1 class="display-4">Welcome to Your Data Visualization Project</h1>
+                <h2>Sina Hatami 5447389</h2>
+                <h2>Shayan Alvansazyazdi 5447411</h2>
+                <p class="mt-4 lead">Explore and Visualize Data with Ease</p>
+                <hr class="my-4">
+                <p>Get ready to dive into the world of data visualization.</p>
+                <div class="wrap">
+                    <button class="button"
+                        onclick="location.href = './pages/assignment 1/assignment1.html';">CLICK</button>
+                </div>
+            </div>
+        </div>
+
     </div>
     <script src="script.js"></script>
 </body>

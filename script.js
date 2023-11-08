@@ -1,14 +1,4 @@
 // Data Import
-d3.csv('Albuquerque_Final_2022-06-18.csv').then(data => {
-    // Data processing (convert numeric values if needed)
-    data.forEach(d => {
-      d.value = +d.value; // Ensure 'value' is numeric
-    });
-  
-    // Create the chart after data loading
-    createBarChart(data);
-  });
-
   // Chart Creation
   function createBarChart(data) {
     const margin = { top: 20, right: 20, bottom: 30, left: 40 };
@@ -52,3 +42,6 @@ d3.csv('Albuquerque_Final_2022-06-18.csv').then(data => {
     // Add labels, titles, and other interactive features as needed
   }
   
+document.getElementsByClassName("button").onclick = function () {
+    location.href = "./pages/assignment 1/assignment1.html";
+};
