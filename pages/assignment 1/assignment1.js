@@ -375,7 +375,7 @@ function showStackBarChart(data) {
 
 cities = []
 let tree_data
-fetch('../../assets/clean_dataset/top_city_scientific_names_with_average_height.json')
+fetch('../../assets/clean_dataset/assignment1/top_city_scientific_names_with_average_height.json')
   .then(response => response.json())
   .then(data => {
     // Process and work with the data from the JSON file
