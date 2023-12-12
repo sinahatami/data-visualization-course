@@ -1,0 +1,864 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Third assignment</title>
+    <link rel="stylesheet" href="assignment3.css">
+    <script src="assignment3.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+
+    <link rel="icon" href="../../assets/tree-pine-clip-art-trees-thumbnail.jpg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
+        integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+</head>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto"> <!-- Align items to the right -->
+            <li class="nav-item">
+                <a class="nav-link" href="../../index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../assignment 1/assignment1.html">assignment 1</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../assignment 2/assignment2.html">assignment 2</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./assignment3.html">assignment 3</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<body class="margin-auto text-center">
+    <div class="title mt-5">
+        <h2>Assignment 2 | Timelines and Distributions</h2>
+    </div>
+    <div class="section mt-5">
+        <div class="section-title mt-4">
+            <h3>Section 1: Linechart</h3>
+            <p>Exploring Annual Temperature Fluctuations (1985-2023) in American States</p>
+
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md"></div>
+                    <div class="col-md" id="dataset-selector">
+                        <label for="dataset-dropdown" style="margin-left: 10px;">city:</label>
+                        <select id="dataset-dropdown" data-style="btn-primary" data-live-search="true"
+                            onchange="handleDatasetChange()">
+                            <option value="Alabama">Alabama</option>
+                            <option value="Alaska">Alaska</option>
+                            <option value="Arizona">Arizona</option>
+                            <option value="Arkansas">Arkansas</option>
+                            <option value="California">California</option>
+                            <option value="Colorado">Colorado</option>
+                            <option value="Connecticut">Connecticut</option>
+                            <option value="Delaware">Delaware</option>
+                            <option value="Florida">Florida</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Idaho">Idaho</option>
+                            <option value="Illinois">Illinois</option>
+                            <option value="Indiana">Indiana</option>
+                            <option value="Iowa">Iowa</option>
+                            <option value="Kansas">Kansas</option>
+                            <option value="Kentucky">Kentucky</option>
+                            <option value="Louisiana">Louisiana</option>
+                            <option value="Maine">Maine</option>
+                            <option value="Maryland">Maryland</option>
+                            <option value="Massachusetts">Massachusetts</option>
+                            <option value="Michigan">Michigan</option>
+                            <option value="Minnesota">Minnesota</option>
+                            <option value="Mississippi">Mississippi</option>
+                            <option value="Missouri">Missouri</option>
+                            <option value="Montana">Montana</option>
+                            <option value="Nebraska">Nebraska</option>
+                            <option value="Nevada">Nevada</option>
+                            <option value="NewHampshire">New Hampshire</option>
+                            <option value="NewJersey">New Jersey</option>
+                            <option value="NewMexico">New Mexico</option>
+                            <option value="NewYork">New York</option>
+                            <option value="NorthCarolina">North Carolina</option>
+                            <option value="NorthDakota">North Dakota</option>
+                            <option value="Ohio">Ohio</option>
+                            <option value="Oklahoma">Oklahoma</option>
+                            <option value="Oregon">Oregon</option>
+                            <option value="Pennsylvania">Pennsylvania</option>
+                            <option value="RhodeIsland">Rhode Island</option>
+                            <option value="SouthCarolina">South Carolina</option>
+                            <option value="SouthDakota">South Dakota</option>
+                            <option value="Tennessee">Tennessee</option>
+                            <option value="Texas">Texas</option>
+                            <option value="Utah">Utah</option>
+                            <option value="Vermont">Vermont</option>
+                            <option value="Virginia">Virginia</option>
+                            <option value="Washington">Washington</option>
+                            <option value="WestVirginia">West Virginia</option>
+                            <option value="Wisconsin">Wisconsin</option>
+                            <option value="Wyoming">Wyoming</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="year-dropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            style="margin-left: 30px;">
+                            Year
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                            style="max-height: 500px; overflow-y: auto;">
+                            <form id="year-checkbox-form">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1895" id="Checkme2"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme2">1895</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1896" id="Checkme3"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme3">1896</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1897" id="Checkme4"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme4">1897</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1898" id="Checkme5"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme5">1898</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1899" id="Checkme6"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme6">1899</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1900" id="Checkme7"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme7">1900</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1901" id="Checkme8"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme8">1901</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1902" id="Checkme9"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme9">1902</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1903" id="Checkme10"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme10">1903</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1904" id="Checkme11"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme11">1904</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1905" id="Checkme12"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme12">1905</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1906" id="Checkme13"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme13">1906</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1907" id="Checkme14"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme14">1907</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1908" id="Checkme15"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme15">1908</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1909" id="Checkme16"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme16">1909</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1910" id="Checkme17"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme17">1910</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1911" id="Checkme18"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme18">1911</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1912" id="Checkme19"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme19">1912</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1913" id="Checkme20"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme20">1913</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1914" id="Checkme21"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme21">1914</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1915" id="Checkme22"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme22">1915</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1916" id="Checkme23"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme23">1916</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1917" id="Checkme24"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme24">1917</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1918" id="Checkme25"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme25">1918</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1919" id="Checkme26"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme26">1919</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1920" id="Checkme27"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme27">1920</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1921" id="Checkme28"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme28">1921</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1922" id="Checkme29"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme29">1922</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1923" id="Checkme30"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme30">1923</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1924" id="Checkme31"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme31">1924</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1925" id="Checkme32"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme32">1925</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1926" id="Checkme33"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme33">1926</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1927" id="Checkme34"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme34">1927</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1928" id="Checkme35"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme35">1928</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1929" id="Checkme36"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme36">1929</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1930" id="Checkme37"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme37">1930</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1931" id="Checkme38"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme38">1931</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1932" id="Checkme39"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme39">1932</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1933" id="Checkme40"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme40">1933</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1934" id="Checkme41"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme41">1934</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1935" id="Checkme42"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme42">1935</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1936" id="Checkme43"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme43">1936</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1937" id="Checkme44"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme44">1937</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1938" id="Checkme45"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme45">1938</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1939" id="Checkme46"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme46">1939</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1940" id="Checkme47"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme47">1940</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1941" id="Checkme48"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme48">1941</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1942" id="Checkme49"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme49">1942</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1943" id="Checkme50"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme50">1943</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1944" id="Checkme51"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme51">1944</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1945" id="Checkme52"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme52">1945</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1946" id="Checkme53"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme53">1946</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1947" id="Checkme54"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme54">1947</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1948" id="Checkme55"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme55">1948</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1949" id="Checkme56"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme56">1949</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1950" id="Checkme57"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme57">1950</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1951" id="Checkme58"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme58">1951</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1952" id="Checkme59"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme59">1952</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1953" id="Checkme60"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme60">1953</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1954" id="Checkme61"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme61">1954</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1955" id="Checkme62"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme62">1955</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1956" id="Checkme63"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme63">1956</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1957" id="Checkme64"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme64">1957</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1958" id="Checkme65"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme65">1958</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1959" id="Checkme66"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme66">1959</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1960" id="Checkme67"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme67">1960</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1961" id="Checkme68"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme68">1961</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1962" id="Checkme69"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme69">1962</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1963" id="Checkme70"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme70">1963</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1964" id="Checkme71"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme71">1964</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1965" id="Checkme72"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme72">1965</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1966" id="Checkme73"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme73">1966</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1967" id="Checkme74"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme74">1967</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1968" id="Checkme75"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme75">1968</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1969" id="Checkme76"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme76">1969</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1970" id="Checkme77"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme77">1970</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1971" id="Checkme78"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme78">1971</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1972" id="Checkme79"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme79">1972</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1973" id="Checkme80"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme80">1973</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1974" id="Checkme81"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme81">1974</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1975" id="Checkme82"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme82">1975</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1976" id="Checkme83"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme83">1976</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1977" id="Checkme84"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme84">1977</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1978" id="Checkme85"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme85">1978</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1979" id="Checkme86"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme86">1979</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1980" id="Checkme87"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme87">1980</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1981" id="Checkme88"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme88">1981</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1982" id="Checkme89"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme89">1982</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1983" id="Checkme90"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme90">1983</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1984" id="Checkme91"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme91">1984</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1985" id="Checkme92"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme92">1985</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1986" id="Checkme93"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme93">1986</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1987" id="Checkme94"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme94">1987</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1988" id="Checkme95"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme95">1988</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1989" id="Checkme96"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme96">1989</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1990" id="Checkme97"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme97">1990</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1991" id="Checkme98"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme98">1991</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1992" id="Checkme99"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme99">1992</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1993" id="Checkme100"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme100">1993</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1994" id="Checkme101"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme101">1994</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1995" id="Checkme102"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme102">1995</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1996" id="Checkme103"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme103">1996</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1997" id="Checkme104"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme104">1997</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1998" id="Checkme105"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme105">1998</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1999" id="Checkme106"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme106">1999</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2000" id="Checkme107" checked
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme107">2000</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2001" id="Checkme108"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme108">2001</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2002" id="Checkme109"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme109">2002</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2003" id="Checkme110"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme110">2003</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2004" id="Checkme111"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme111">2004</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2005" id="Checkme112"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme112">2005</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2006" id="Checkme113"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme113">2006</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2007" id="Checkme114"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme114">2007</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2008" id="Checkme115"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme115">2008</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2009" id="Checkme116"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme116">2009</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2010" id="Checkme117"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme117">2010</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2011" id="Checkme118"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme118">2011</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2012" id="Checkme119"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme119">2012</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2013" id="Checkme120"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme120">2013</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2014" id="Checkme121"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme121">2014</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2015" id="Checkme122"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme122">2015</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2016" id="Checkme123"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme123">2016</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2017" id="Checkme124"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme124">2017</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2018" id="Checkme125"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme125">2018</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2019" id="Checkme126"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme126">2019</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2020" id="Checkme127"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme127">2020</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2021" id="Checkme128"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme128">2021</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2022" id="Checkme129"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme129">2022</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2023" id="Checkme130"
+                                        onchange="handleCheckboxChange(this)">
+                                    <label class="form-check-label" for="Checkme130">2023</label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md"></div>
+                </div>
+            </div>
+
+            <script>
+                function handleDatasetChange() {
+                    var datasetDropdown = document.getElementById("dataset-dropdown");
+                    var selectedDataset = datasetDropdown.options[datasetDropdown.selectedIndex].value;
+
+                    if (selectedDataset === "Alaska") {
+                        for (var year = 1895; year <= 1924; year++) {
+                            var checkbox = document.getElementById("Checkme" + (year - 1893));
+                            if (checkbox.checked) {
+                                checkbox.checked = false;
+                            }
+                            checkbox.setAttribute("disabled", "true");
+                        }
+                    } else {
+                        for (var year = 1895; year <= 2023; year++) {
+                            document.getElementById("Checkme" + (year - 1893)).removeAttribute("disabled");
+                        }
+                    }
+                }
+            </script>
+
+            <div id="linechart_1">
+            </div>
+
+            <div class="para">
+                Dive into the realm of climate data with our interactive line chart, offering insights into the annual
+                temperature averages across American states from 1985 to 2023. Select a state, choose multiple years,
+                and witness the monthly temperature variations displayed on the chart's x-axis, with temperature values
+                measured in Celsius on the y-axis. Uncover the distinctive patterns and shifts in temperature throughout
+                the years, empowering you to grasp the intricate dynamics of climate change on a month-to-month basis.
+                Whether you're a climate researcher, student, or simply curious about the changing face of American
+                weather, this visualization provides a user-friendly and informative platform to explore the fascinating
+                world of annual temperature fluctuations.
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div id="external"></div>
+    <div class="section mt-2">
+        <div class="section-title mt-5">
+            <h3>Section 2: Radarchart</h3>
+            <p>Louisiana's Temperature Spectrum: A 2020 Radar Chart Trilogy</p>
+
+            <div class="possibly-sidebyside row mt-5" id="radarcharts">
+                <div class="col-md-4" id="radarchart_1">
+                    <div style="text-align: center;">
+                        <h4 style="padding-right: 60px;">MIN</h4>
+                    </div>
+                </div>
+                <div class="col-md-4" id="radarchart_2">
+                    <div style="text-align: center;">
+                        <h4 style="padding-right: 60px;">AVG</h4>
+                    </div>
+                </div>
+                <div class="col-md-4" id="radarchart_3">
+                    <div style="text-align: center;">
+                        <h4 style="padding-right: 60px;">MAX</h4>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+
+        <div class="para">
+            Immerse yourself in the climatic tapestry of Louisiana throughout the year 2020 with our unique Radar Chart
+            Trilogy. This visual masterpiece showcases the minimum, average, and maximum temperatures for each month,
+            intricately woven into three distinct radar charts. Each chart paints a vivid picture of the state's
+            temperature dynamics, allowing you to discern monthly nuances, temperature extremes, and the overall climate
+            narrative. Whether you're a weather aficionado, a Louisiana resident, or a data enthusiast, this trilogy
+            provides an engaging and comprehensive exploration of the 2020 temperature landscape, unlocking a deeper
+            understanding of how the state's climate evolves month by month. Step into the world of radar charts and
+            discover the beauty of Louisiana's temperature spectrum in this visually captivating and informative
+            presentation.
+        </div>
+    </div>
+
+    <div class="section mt-4">
+        <div class="section-title mt-5">
+            <h3>Section 3: Ridgeline</h3>
+            <p style="margin-left: 10px;">Description
+            </p>
+            <div id="ridgeline_1">
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4"></div>
+</body>
